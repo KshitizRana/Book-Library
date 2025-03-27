@@ -83,3 +83,22 @@ nextBtn.addEventListener("click", async () => {
   const lib = await dataFetch(page);
   renderCards(lib.data.data);
 });
+
+// sort functionality
+const sortBtn = document.getElementById("sort");
+sortBtn.addEventListener("click", async () => {
+  const lib = await dataFetch(page);
+  const sorteddata = lib.data.data.sort((a, b) =>
+    a.volumeInfo.title > b.volumeInfo.title ? 1 : -1
+  );
+  renderCards(sorteddata);
+});
+
+const sortDateBtn = document.getElementById("sortDate");
+sortDateBtn.addEventListener("click", async () => {
+  const lib = await dataFetch(page);
+  const sorteddata = lib.data.data.sort((a, b) =>
+    a.volumeInfo.publishedDate > b.volumeInfo.publishedDate ? 1 : -1
+  );
+  renderCards(sorteddata);
+});
