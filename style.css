@@ -2,74 +2,300 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.2s;
 }
-nav {
-  padding: 8px;
 
+:root {
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --accent-color: #3b82f6;
+  --accent-hover: #60a5fa;
+  --border-color: #4b5563;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --card-bg: #1f2937;
+  --card-hover: #2d3748;
+  --button-primary: #3b82f6;
+  --button-hover: #2563eb;
+  --button-secondary: #10b981;
+  --button-secondary-hover: #059669;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+nav {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-wrap: wrap;
+  gap: 12px;
+}
 
-  height: 50px;
+.heading {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--accent-color), #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+search {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  margin: 0 16px;
+}
+
+.serach {
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+}
+
 #searchbar {
-  width: 450px;
-  padding: 5px;
-  border-radius: 18px;
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
+
+#searchbar::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+#searchbar:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+button {
+  background: var(--button-primary);
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 15px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background: var(--button-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
 main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  border: 1px solid;
+  padding: 32px 16px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
-.container {
-  padding: 20px;
-  width: 55vw;
-  display: flex;
-  gap: 50px;
-  flex-wrap: wrap;
-  /* flex-direction: column; */
-  justify-content: center;
-  align-items: center;
-}
-.bookcard {
-  width: 290px;
-  height: 350px;
 
-  border-radius: 20px;
-  background: #f5f5f5;
-  position: relative;
-  padding: 8px;
-  border: 2px solid #c3c6ce;
-  transition: 0.5s ease-out;
-  overflow: visible;
-  text-decoration: none;
-  /* overflow: hidden; */
-}
-a {
-  text-decoration: none;
-}
-.thumbnail {
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
   width: 100%;
-  border: 1px #e4e4e4;
-  border-radius: 8px;
-  object-fit: fill;
+  margin-bottom: 40px;
 }
-.cardText {
-  font-size: 16px;
-  margin-top: 10px;
-  font-weight: bolder;
-  line-height: 1.2rem;
+
+/* Book Card Styling */
+.bookcard {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.bookcard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+  background: var(--card-hover);
+}
+
+.bookcard a {
   text-decoration: none;
-  color: black;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px;
+  color: inherit;
 }
+
+.thumbnail {
+  width: 128px;
+  height: 180px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 0 auto 16px;
+  transition: transform 0.3s;
+}
+
+.bookcard:hover .thumbnail {
+  transform: scale(1.05);
+}
+
+.cardText {
+  font-size: 14px;
+  margin-top: 8px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+#bookTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+#bookAuthor {
+  color: var(--accent-color);
+}
+
+/* List View Styling */
+.list-view {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 16px;
+}
+
+.list-view .bookcard {
+  flex-direction: row;
+  height: auto;
+}
+
+.list-view .bookcard a {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.list-view .thumbnail {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.list-view .cardText {
+  margin-top: 4px;
+}
+
+.list-view #bookTitle {
+  margin-top: 0;
+}
+
+/* Pagination Styling */
 .pagination {
   display: flex;
-  padding: 10px;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
 }
+
 .pageBtn {
-  margin: 0px 5px;
+  background: var(--button-secondary);
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  min-width: 120px;
+  justify-content: center;
+  display: flex;
+}
+
+.pageBtn:hover {
+  background: var(--button-secondary-hover);
+}
+
+#pageNumber {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  min-width: 60px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  search {
+    width: 100%;
+    margin: 16px 0;
+  }
+
+  #searchbar {
+    width: 100%;
+  }
+
+  .container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .list-view .bookcard a {
+    flex-direction: column;
+  }
+
+  .list-view .thumbnail {
+    margin: 0 auto 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
